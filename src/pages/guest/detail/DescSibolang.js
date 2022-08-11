@@ -7,14 +7,14 @@ import Moment from '../../../components/Moment';
 import ReactPlayer from 'react-player';
 import { URLROOT } from '../../../services';
 
-const DescSikoja = (props) => {
-    const { dataSikoja } = props;
+const DescSibolang = (props) => {
+    const { dataSibolang } = props;
     return (
         <Box>
-            <Typography variant='h6' textTransform='capitalize' fontWeight='bold' color='primary.dark'> {dataSikoja[0].title}</Typography>
-            <Typography variant='subtitle1' color='grey.600' fontStyle='italic' paragraph>{Moment(dataSikoja[0].created_at)}, Oleh {dataSikoja[0].name}</Typography>
-            <Typography variant='body1' color='grey.900' >Keterangan: {dataSikoja[0].description}</Typography>
-            <Typography variant='body1' color='grey.900'>Lokasi: {dataSikoja[0].village ? dataSikoja[0].village.village + ',' : ''}{dataSikoja[0].street ? dataSikoja[0].street.street : ''} </Typography>
+            <Typography variant='h6' textTransform='capitalize' fontWeight='bold' color='primary.dark'> {dataSibolang[0].title}</Typography>
+            <Typography variant='subtitle1' color='grey.600' fontStyle='italic' paragraph>{Moment(dataSibolang[0].created_at)}, Oleh {dataSibolang[0].name}</Typography>
+            <Typography variant='body1' color='grey.900' >Keterangan: {dataSibolang[0].description}</Typography>
+            <Typography variant='body1' color='grey.900'>Kampung: {dataSibolang[0].village ? dataSibolang[0].village.village     : '-'} </Typography>
             <ImageList
                 sx={{ width: '100', height: 'auto' }}
                 variant="quilted"
@@ -23,7 +23,7 @@ const DescSikoja = (props) => {
                 width='100%'
             >
                 {
-                    dataSikoja[0].galery.map((galery) => {
+                    dataSibolang[0].galery_sibolang.map((galery) => {
                         const extension = galery.filename.split('.')
                         if (extension[1] === 'mp4') {
                             return (
@@ -48,4 +48,4 @@ const DescSikoja = (props) => {
     )
 }
 
-export default DescSikoja
+export default DescSibolang

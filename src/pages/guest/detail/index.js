@@ -6,17 +6,17 @@ import Footer from '../Footer';
 import APIGETONE from '../../../services/axios/GetOne';
 import { Grid, Skeleton } from '@mui/material';
 import TimeLine from './TimeLine';
-import DescSikoja from './DescSikoja';
+import DescSibolang from './DescSibolang';
 
 const Detail = () => {
     const params = useParams();
-    const [sikoja, setSikoja] = useState([]);
+    const [sibolang, setSibolang] = useState([]);
     const [disposisi, setDisposisi] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        APIGETONE.SikojaOne(params.id).then(result => {
-            setSikoja(result.data);
+        APIGETONE.SibolangOne(params.id).then(result => {
+            setSibolang(result.data);
             setIsLoading(false);
         }).catch(error => {
             // console.log(error);
@@ -28,9 +28,7 @@ const Detail = () => {
         APIGETONE.DispOne(params.id).then(result => {
             setDisposisi(result.data);
             setIsLoading(false);
-        }).catch(error => {
-            // console.log(error);
-        });
+        }).catch(() => { });
     }, []);
 
     return (
@@ -57,11 +55,11 @@ const Detail = () => {
                 <Container maxWidth='lg' sx={{ pt: 3 }}>
                     <Grid container spacing={1}>
                         <Grid item lg={5} md={5} sm={12}>
-                            <TimeLine dataSikoja={sikoja} dataDisp={disposisi} />
+                            <TimeLine dataSibolang={sibolang} dataDisp={disposisi} />
                         </Grid>
                         <Grid item lg={7} md={6} sm={12}>
                             <Container sx={{ p: 1, mb: 4, mt: 2 }}>
-                                <DescSikoja dataSikoja={sikoja} />
+                                <DescSibolang dataSibolang={sibolang} />
                                 <DescDisp dataDisp={disposisi} />
                             </Container>
                         </Grid>

@@ -5,7 +5,7 @@ import GuestLayout from '../../pages/guest';
 
 const Home = Loadable(React.lazy(() => import('../../pages/guest/home')));
 const About = Loadable(React.lazy(() => import('../../pages/guest/about')));
-const Sikojas = Loadable(React.lazy(() => import('../../pages/guest/sikojas')));
+const Sibolang = Loadable(React.lazy(() => import('../../pages/guest/sibolang')));
 const Detail = Loadable(React.lazy(() => import('../../pages/guest/detail')));
 
 
@@ -22,8 +22,8 @@ const GuestRoutes = {
             element: <About />
         },
         {
-            path: 'sikojas',
-            element: <Sikojas />
+            path: 'sibolangs',
+            element: <Sibolang />
         },
         {
             path: 'detail',

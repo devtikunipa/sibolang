@@ -6,12 +6,13 @@ import NavBar from './Navbar';
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#607d8b',
+            main: '#A47E3B',
             light: '#eceff1',
-            dark: '#37474f',
+            dark: '#61481C',
+            contrastText: '#ffffff',
         },
         blue: {
-            main: '#2196f3',
+            main: '#E6B325',
             contrastText: 'white'
         },
         grey: {

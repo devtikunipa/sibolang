@@ -20,10 +20,10 @@ const pages = [
     },
     {
         path: '/about',
-        name: 'Tentang Sikoja',
+        name: 'Tentang Sibolang',
     },
     {
-        path: '/sikojas',
+        path: '/sibolangs',
         name: 'Data Pengaduan',
     },
 
@@ -43,7 +43,7 @@ const NavBar = () => {
         <AppBar position="static">
             <Container maxWidth="lg">
                 <Toolbar disableGutters>
-                    <Typograph text="SIKOJA"
+                    <Typograph text="SIBOLANG"
                         variant="h5"
                         noWrap
                         component="a"
@@ -53,7 +53,7 @@ const NavBar = () => {
                             display: { xs: 'none', md: 'flex' },
                             fontFamily: 'monospace',
                             fontWeight: 700,
-                            letterSpacing: '.1rem',
+                            letterSpacing: '.05rem',
                             color: 'white',
                             textDecoration: 'none',
                         }}
@@ -95,7 +95,7 @@ const NavBar = () => {
                             ))}
                         </Menu>
                     </Box>
-                    <Typograph text="SIKOJA"
+                    <Typograph text="SIBOLANG"
                         variant="h5"
                         noWrap
                         component="a"
@@ -124,7 +124,7 @@ const NavBar = () => {
                         ))}
                     </Box>
                     <Box>
-                        <Button href='login' variant="contained" sx={{ backgroundColor: '#ffffff', color: "#607d8b" }}>LOGIN</Button>
+                        <Button href='login' variant="contained" color='inherit' sx={{ color: 'primary.dark' }}>LOGIN</Button>
                     </Box>
                 </Toolbar>
             </Container>

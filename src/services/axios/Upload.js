@@ -14,7 +14,7 @@ const Galery = (path, data) => {
     })
 }
 
-const UploadGalery = (data) => Galery('uploadGalery', data);
+const UploadGalery = (data) => Galery('uploadGalerySibolang', data);
 
 const APIUPLOAD = {
     UploadGalery,

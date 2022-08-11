@@ -22,8 +22,10 @@ import ImageListItem from '@mui/material/ImageListItem';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import APIUPLOAD from '../../../services/axios/Upload';
-import FormGroup from '@mui/material/FormGroup';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import FormLabel from '@mui/material/FormLabel';
 import Checkbox from '@mui/material/Checkbox';
 
 
@@ -32,14 +34,14 @@ const FormSikoja = () => {
         title: '',
         description: '',
         village_id: null,
-        street_id: null,
+        category_id: null,
         name: '',
         hp: null,
 
     }
 
     const [data, setData] = useState(initialDataState);
-    const [streets, setStreets] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [villages, setVillages] = useState([]);
     const [message, setMessage] = useState({ msg: 'Belum ada aktivitas', status: false, code: 201 });
     const [open, setOpen] = useState(false);
@@ -81,9 +83,11 @@ const FormSikoja = () => {
 
 
     useEffect(() => {
-        APIGETALL.Streets().then(result => {
-            setStreets(result.data)
+        APIGETALL.Categories().then(result => {
+            setCategories(result.data)
         });
+    }, []);
+    useEffect(() => {
         APIGETALL.Villages().then(result => {
             setVillages(result.data)
         });
@@ -92,16 +96,14 @@ const FormSikoja = () => {
     const handleOnChange = (event) => {
         const { name, value } = event.target;
         setData({ ...data, [name]: value });
+        console.log({ ...data, [name]: value });
         setMessage({ status: false });
     };
     const handleOnSelectedVillage = (event, newValue) => {
         const id = newValue.id;
         setData({ ...data, village_id: id })
     }
-    const handleOnSelectedStreet = (event, newValue) => {
-        const id = newValue.id;
-        setData({ ...data, street_id: id })
-    }
+
     const handleChecked = (event) => {
         setChecked(event.target.checked);
     };
@@ -110,30 +112,31 @@ const FormSikoja = () => {
         event.preventDefault();
         files.length === 0 ? setMessage({ code: 400, msg: 'Upload gambar/video sebagai bukti pengaduan', status: true }) :
             setOpen(true)
-        APISTORE.StoreSikoja(data).then(result => {
+        APISTORE.StoreSibolang(data).then(result => {
             // console.log(result.data);
             setMessage({ code: 201, msg: "Laporan telah disampaikan", status: true });
             for (let file of files) {
                 const data2 = new FormData();
                 data2.append('galery', file)
-                data2.append('sikoja_id', result.data.id)
-                APIUPLOAD.UploadGalery(data2).then(result => {
+                data2.append('sibolang_id', result.data.id)
+                APIUPLOAD.UploadGalery(data2).then(() => {
                     setData({
                         title: '',
                         description: '',
                         village_id: null,
-                        street_id: null,
+                        category_id: null,
                         name: '',
                         hp: null,
                     });
                     setFiles([]);
-                }).catch(error => {
+                }).catch(() => {
                     setOpen(false)
                     setMessage({ code: 400, msg: 'Gagal mengupload, coba lagi!', status: true })
                 })
             }
             setOpen(false)
-        }).catch(error => {
+        }).catch((error) => {
+            console.log(error)
             setMessage({ code: 400, msg: 'Gagal mengupload, coba lagi!', status: true })
             setOpen(false)
         });
@@ -154,12 +157,28 @@ const FormSikoja = () => {
                     >
                         <form onSubmit={handleOnSubmit}>
                             <CardContent>
-                                <Typograph text="SIKOJA" gutterBottom variant="h5" textTransform='uppercase' fontWeight='bold' sx={{ py: 2 }} />
+                                <Typograph text="SIBOLANG" gutterBottom variant="h5" textTransform='uppercase' fontWeight='bold' sx={{ py: 2 }} />
                                 <Alert severity={message.code == 201 ? 'success' : 'error'} sx={{ mb: 2, display: `${message.status ? 'flex' : 'none'}` }} >{message.msg}</Alert>
                                 <FormControl fullWidth >
+                                    <FormLabel id="radion-button" sx={{ mb: 1 }}>Pilih kategori Pengaduan!</FormLabel>
+                                    <RadioGroup
+                                        row
+                                        aria-labelledby="radion-button"
+                                        name="category_id"
+                                        value={data.category_id}
+                                        onChange={handleOnChange}
+                                        sx={{ mb: 1, display: 'flex', justifyContent: 'space-around' }}
+                                    >
+                                        {
+                                            categories.map((category) => (
+                                                <FormControlLabel key={category.id} value={category.id} control={<Radio required checked={data.category_id == category.id} />} label={category.category} />
+                                            ))
+                                        }
+                                    </RadioGroup>
                                     <TextField required id="title" name='title' label="Judul Laporan Anda" variant="outlined" value={data.title} onChange={handleOnChange} />
                                     <TextField required id="description" name='description' multiline rows={4} label="Isi Laporan Anda" variant="outlined" value={data.description} onChange={handleOnChange} sx={{ mt: 2 }} />
                                     <Autocomplete
+                                        disabled={checked}
                                         id="village_id"
                                         name='village_id'
                                         options={villages}
@@ -169,19 +188,8 @@ const FormSikoja = () => {
                                         renderInput={(params) => <TextField {...params} required label="Nama Kampung" />}
                                         onChange={handleOnSelectedVillage}
                                     />
-                                    <Autocomplete
-                                        disabled={checked}
-                                        id="street_id"
-                                        name='street_id'
-                                        options={streets}
-                                        sx={{ mt: 2 }}
-                                        getOptionLabel={(streets) => `${streets.street}`}
-                                        noOptionsText='Nama Jalan Tidak Ditemukan'
-                                        renderInput={(params) => <TextField {...params} required label="Nama Jalan" />}
-                                        onChange={handleOnSelectedStreet}
-                                    />
                                     <FormControlLabel control={<Checkbox checked={checked}
-                                        onChange={handleChecked} />} label="Belum ada nama jalan" />
+                                        onChange={handleChecked} />} label="Belum ada nama kampung" />
                                     <Grid container sx={{ mt: 1 }} spacing={2}>
                                         <Grid item lg={7} md={12} xs={12}>
                                             <TextField fullWidth required id="name" name='name' label="Nama Anda" value={data.name} variant="outlined" onChange={handleOnChange} />

@@ -34,7 +34,7 @@ const GridItem = ({ dt }) => {
                 >
                     <CardHeader
                         title={<Typography variant="h6" fontWeight='bold' >
-                            {dt.title.slice(0, 60) + (dt.title.length > 60 ? '...' : '')}
+                            {dt.title.slice(0, 50) + (dt.title.length > 50 ? '...' : '')}
                         </Typography>}
                         subheader={<Typography variant="caption" color="text.secondary">
                             {Moment(dt.created_at)}
@@ -42,12 +42,12 @@ const GridItem = ({ dt }) => {
                         sx={{ px: 2, py: 1 }}
                     />
                     {
-                        dt.galery.map((paths, index) => {
+                        dt.galery_sibolang.map((paths, index) => {
                             if (index === 0) {
                                 const name = paths.filename.split(".");
                                 if (name[1] === 'mp4') {
                                     return (
-                                        <ReactPlayer key={index} height='100%' width='100%' controls url={URLROOT + paths.path} playing={true} />
+                                        <ReactPlayer key={index} height='250px' width='100%' controls url={URLROOT + paths.path} playing={true} />
                                     )
                                 } else {
                                     return (
@@ -79,7 +79,7 @@ const GridItem = ({ dt }) => {
         </Grid>
     )
 }
-const ListSikoja = ({ data }) => {
+const ListSibolang = ({ data }) => {
 
     const results = data.map(dt => <GridItem key={dt.id} dt={dt} />);
 
@@ -91,4 +91,4 @@ const ListSikoja = ({ data }) => {
     )
 }
 
-export default ListSikoja
+export default ListSibolang

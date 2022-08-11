@@ -15,7 +15,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Moment from '../../../components/Moment';
 
 const TimeLine = (props) => {
-    const { dataSikoja, dataDisp } = props;
+    const { dataSibolang, dataDisp } = props;
 
     return (
         <Timeline position="alternate" sx={{ bgcolor: 'primary.light', borderRadius: 2, py: 2 }}>
@@ -28,8 +28,8 @@ const TimeLine = (props) => {
                     variant="body2"
                     color="text.secondary"
                 >
-                    <Typography>{Moment(dataSikoja[0].created_at)}</Typography>
-                    <Typography variant='subtitile1'>Oleh: {dataSikoja[0].name}</Typography>
+                    <Typography>{Moment(dataSibolang[0].created_at)}</Typography>
+                    <Typography variant='subtitile1'>Oleh: {dataSibolang[0].name}</Typography>
                 </TimelineOppositeContent>
                 <TimelineSeparator>
                     <TimelineDot color='error'>
@@ -42,7 +42,7 @@ const TimeLine = (props) => {
                         Laporan Diterima
                     </Typography>
                     <Typography variant='subtitile1' paragraph align='left'>
-                        {dataSikoja[0].title}
+                        {dataSibolang[0].title}
                     </Typography>
                 </TimelineContent>
             </TimelineItem>
@@ -53,7 +53,7 @@ const TimeLine = (props) => {
                     color="text.secondary"
                 >
                     <Typography>{dataDisp[0] ? Moment(dataDisp[0].created_at) : ''}</Typography>
-                    <Typography variant='subtitile1'>Oleh Admin SIKOJA</Typography>
+                    <Typography variant='subtitile1'>Oleh Admin SIBOLANG</Typography>
                 </TimelineOppositeContent>
                 <TimelineSeparator>
                     <TimelineDot sx={{ bgcolor: dataDisp[0] ? 'warning.main' : 'grey' }} >
@@ -84,7 +84,7 @@ const TimeLine = (props) => {
                     <TimelineDot color={dataDisp[0] ? (dataDisp[0].description ? 'success' : 'grey') : 'grey'} >
                         <PendingActionsIcon />
                     </TimelineDot>
-                    <TimelineConnector sx={{ bgcolor: dataSikoja[0].status_id === 4 ? 'blue.main' : 'grey' }} />
+                    <TimelineConnector sx={{ bgcolor: dataSibolang[0].status_id === 4 ? 'info.main' : 'grey' }} />
                 </TimelineSeparator>
                 <TimelineContent sx={{ py: '12px', px: 2 }}>
                     <Typography component="span" color={dataDisp[0] ? (dataDisp[0].description ? 'primary' : 'text.secondary') : 'text.secondary'} fontWeight='bold'>
@@ -102,15 +102,15 @@ const TimeLine = (props) => {
                     variant="body2"
                     color="text.secondary"
                 >
-                    {dataSikoja[0].status_id === 4 ? Moment(dataSikoja[0].updated_at) : ''}
+                    {dataSibolang[0].status_id === 4 ? Moment(dataSibolang[0].updated_at) : ''}
                 </TimelineOppositeContent>
                 <TimelineSeparator>
-                    <TimelineDot color={dataSikoja[0].status_id === 4 ? 'blue' : 'grey'}>
+                    <TimelineDot color={dataSibolang[0].status_id === 4 ? 'info' : 'grey'}>
                         <CheckCircleOutlineIcon />
                     </TimelineDot>
                 </TimelineSeparator>
                 <TimelineContent sx={{ py: '12px', px: 2, pt: 2 }}>
-                    <Typography component="span" color={dataSikoja[0].status_id === 4 ? 'primary' : 'text.secondary'} fontWeight='bold'>
+                    <Typography component="span" color={dataSibolang[0].status_id === 4 ? 'primary' : 'text.secondary'} fontWeight='bold'>
                         Selesai
                     </Typography>
                 </TimelineContent>

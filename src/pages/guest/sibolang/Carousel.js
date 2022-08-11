@@ -26,15 +26,15 @@ const Carousel = (props) => {
   const { lastUpdate } = props;
   return (
     lastUpdate.map((post, index) => {
-      if (index === 0 && post.galery[0]) {
-        const extension = post.galery[0].filename.split(".");
+      if (index === 0 && post.galery_sibolang[0]) {
+        const extension = post.galery_sibolang[0].filename.split(".");
         return (
           <Grid container key={index} alignItems='center' sx={{ display: { xs: 'none', sm: 'none', md: 'flex', lg: 'flex' }, bgcolor: 'primary.light', mt: 2, borderRadius: 2 }}>
             <Grid item lg={6}>
               {
                 extension[1] === 'mp4' ? (
                   <Box>
-                    <ReactPlayer height='auto' width='100%' controls url={URLROOT + post.galery[0].path} playing={true} />
+                    <ReactPlayer height='auto' width='100%' controls url={URLROOT + post.galery_sibolang[0].path} playing={true} />
                   </Box>
                 ) : (
                   <Paper
@@ -46,7 +46,7 @@ const Carousel = (props) => {
                       backgroundSize: 'cover',
                       backgroundRepeat: 'no-repeat',
                       backgroundPosition: 'center',
-                      backgroundImage: `url(${URLROOT}${post.galery[0].path})`,
+                      backgroundImage: `url(${URLROOT}${post.galery_sibolang[0].path})`,
                     }}
                   />
                 )

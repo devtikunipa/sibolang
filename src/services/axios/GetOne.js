@@ -11,11 +11,11 @@ const GetOne = (path) => {
     })
 }
 
-const SikojaOne = (id) => GetOne('sikoja/' + id);
-const DispOne = (id) => GetOne('sikojadisp/' + id);
+const SibolangOne = (id) => GetOne('sibolang/' + id);
+const DispOne = (id) => GetOne('sibolangdisp/' + id);
 
 const APIGETONE = {
-    SikojaOne,
+    SibolangOne,
     DispOne,
 }
 

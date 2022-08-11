@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import CountUp from 'react-countup';
-import BgHome from '../../../assets/images/bg-home.jpg';
+import BgHome from '../../../assets/images/bg-home1.jpg';
 import Typograph from '../../../components/Typograph';
-import FormSikoja from './FormSikoja';
+import FOrmSibolang from './Forms';
 import FlowReport from './FlowReport';
 import Footer from '../Footer';
 import APIGETALL from '../../../services/axios/GetAll';
@@ -12,7 +12,7 @@ import APIGETALL from '../../../services/axios/GetAll';
 const Home = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
-        APIGETALL.Sikojas().then(result => {
+        APIGETALL.Sibolangs().then(result => {
             setData(result.data);
         }).catch(error => {
             console.log(error);
@@ -31,7 +31,7 @@ const Home = () => {
         }}>
             <Typograph text="Layanan Pengaduan Online Manokwari" variant="h4" color="white" fontWeight={600} />
             <Typograph text="Laporan anda akan ditindaklanjuti oleh pihak instansi pemerintah berwenang" variant="h6" color="white" sx={{ mt: 2 }} />
-            <FormSikoja />
+            <FOrmSibolang />
             <Box sx={{ my: 5, py: 6 }}>
                 <FlowReport />
             </Box>

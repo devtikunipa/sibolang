@@ -11,9 +11,9 @@ const GetAll = (path) => {
     })
 }
 
-const Sikojas = () => GetAll('sikoja');
+const Sibolangs = () => GetAll('sibolang');
 const Villages = () => GetAll('village');
-const Streets = () => GetAll('street');
+const Categories = () => GetAll('category');
 // const Sikoja = async () => {
 //     try {
 //         const result = GetAll('sikoja');
@@ -23,9 +23,9 @@ const Streets = () => GetAll('street');
 //     }
 // }
 const APIGETALL = {
-    Sikojas,
+    Sibolangs,
     Villages,
-    Streets,
+    Categories,
 }
 
 export default APIGETALL

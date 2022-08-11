@@ -14,10 +14,10 @@ const Store = (path, data) => {
     })
 }
 
-const StoreSikoja = (data) => Store('sikoja', data);
+const StoreSibolang = (data) => Store('sibolang', data);
 
 const APISTORE = {
-    StoreSikoja,
+    StoreSibolang,
 }
 
 

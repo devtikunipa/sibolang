@@ -5,7 +5,7 @@ import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import Carousel from './Carousel';
-import ListSikoja from './ListSikoja';
+import ListSibolang from './ListSibolang';
 import Footer from '../Footer';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -29,7 +29,7 @@ const Sikojas = () => {
     const handleSubmit = (e) => e.preventDefault()
 
     useEffect(() => {
-        APIGETALL.Sikojas().then(result => {
+        APIGETALL.Sibolangs().then(result => {
             setData(result.data);
             setSearch(result.data)
             setIsLoading(false);
@@ -45,7 +45,6 @@ const Sikojas = () => {
                 <Container maxWidth='lg'>
                     <form className='search' onSubmit={handleSubmit}>
                         <Paper
-                            component="form"
                             sx={{ px: 0, display: 'flex', bgcolor: 'primary.light', alignItems: 'center', width: '100%', mx: 'auto', my: 4 }}
                         >
                             <InputBase
@@ -61,7 +60,7 @@ const Sikojas = () => {
                         </Paper>
                     </form>
                     <Carousel lastUpdate={search} />
-                    <ListSikoja data={search} />
+                    <ListSibolang data={search} />
                     <Box sx={{ mx: 'auto', mt: 5, textAlign: 'center' }}>
                         <Button variant='outlined'>Load more...</Button>
                     </Box>

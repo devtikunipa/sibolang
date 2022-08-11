@@ -28,7 +28,7 @@ const MainMedia = (props) => {
                                 width='100%'
                             >
                                 {
-                                    dataDisp[0].file.map((galery) => {
+                                    dataDisp[0].file_sibolangdisp.map((galery) => {
                                         const extension = galery.filename.split('.')
                                         if (extension[1] === 'mp4') {
                                             return (
@@ -52,7 +52,7 @@ const MainMedia = (props) => {
                         </>
                     ) : (
                         <>
-                            <Typography variant='subtitle1' color='grey.600' fontStyle='italic' >{Moment(dataDisp[0].created_at)}, Oleh Admin SIKOJA</Typography>
+                            <Typography variant='subtitle1' color='grey.600' fontStyle='italic' >{Moment(dataDisp[0].created_at)}, Oleh Admin SIBOLANG</Typography>
                             <Typography variant='body1' color='grey.900' >Keterangan: Laporan ini akan di ditindaklanjuti oleh pihak {dataDisp[0].instance.instance}.</Typography>
                         </>
                     )
