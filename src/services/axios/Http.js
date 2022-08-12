@@ -1,8 +1,9 @@
 import axios from "axios";
+import { URLROOT } from "..";
 
 const Http = axios.create({
     withCredentials: true,
-    baseURL: 'http://localhost:8000/api/',
+    baseURL: `${URLROOT}api/`,
     headers: {
         'Content-Type': 'application/json',
     }
