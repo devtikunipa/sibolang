@@ -54,7 +54,7 @@ const FlowReport = () => {
                             </Avatar>
                         }>
                             <Typography variant='h6' fontWeight='bold'>
-                                DItindaklanjuti
+                                Ditindaklanjuti
                             </Typography>
                             <Typography variant='subtitle2' color='text.secondary'>
                                 Instansi yang berwenang akan merespon laporan anda

@@ -12,9 +12,9 @@ const DescSibolang = (props) => {
     return (
         <Box>
             <Typography variant='h6' textTransform='capitalize' fontWeight='bold' color='primary.dark'> {dataSibolang[0].title}</Typography>
-            <Typography variant='subtitle1' color='grey.600' fontStyle='italic' paragraph>{Moment(dataSibolang[0].created_at)}, Oleh {dataSibolang[0].name}</Typography>
+            <Typography variant='subtitle1' color='grey.600' fontStyle='italic' paragraph textTransform='capitalize'>{Moment(dataSibolang[0].created_at)}, Oleh {dataSibolang[0].name}</Typography>
             <Typography variant='body1' color='grey.900' >Keterangan: {dataSibolang[0].description}</Typography>
-            <Typography variant='body1' color='grey.900'>Kampung: {dataSibolang[0].village ? dataSibolang[0].village.village     : '-'} </Typography>
+            <Typography variant='body1' color='grey.900'>Kampung: {dataSibolang[0].village ? dataSibolang[0].village.village : '-'} </Typography>
             <ImageList
                 sx={{ width: '100', height: 'auto' }}
                 variant="quilted"

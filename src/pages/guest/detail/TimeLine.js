@@ -29,7 +29,7 @@ const TimeLine = (props) => {
                     color="text.secondary"
                 >
                     <Typography>{Moment(dataSibolang[0].created_at)}</Typography>
-                    <Typography variant='subtitile1'>Oleh: {dataSibolang[0].name}</Typography>
+                    <Typography variant='subtitile1' textTransform='capitalize'>Oleh: {dataSibolang[0].name}</Typography>
                 </TimelineOppositeContent>
                 <TimelineSeparator>
                     <TimelineDot color='error'>

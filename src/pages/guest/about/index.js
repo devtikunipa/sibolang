@@ -1,16 +1,30 @@
 import React from 'react';
 import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 import Footer from '../Footer';
 import Typograph from '../../../components/Typograph';
+import Sibolang from '../../../assets/images/sibolang.jpg';
 
 const About = () => {
     return (
         <>
-            <Container maxWidth='lg'>
-                <Typograph text='Apa Itu SIBOLANG?' variant='h4' component='h3' textTransform='uppercase' fontWeight='bold' sx={{ my: 4 }} />
-                <Typograph variant='body1' paragraph align='justify' text='Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident illum, nulla voluptate magnam consectetur odit maiores veniam, sunt et libero tempora nam enim atque in id ipsam eaque? Id enim laboriosam corporis consequatur incidunt dolore doloribus harum illo facilis molestias? Dolores asperiores eum voluptatum consequuntur quo dicta tenetur, incidunt totam ipsa molestias distinctio dolor explicabo ducimus quaerat! Quas sed pariatur ullam totam reiciendis voluptate obcaecati accusamus earum nam corrupti nemo, inventore iste fugiat nulla et nobis incidunt delectus perspiciatis temporibus id, blanditiis eos. Modi accusamus, in rerum est iusto laborum porro tempora, nemo distinctio quae minima aliquam fugiat molestias deleniti enim magni? Modi deleniti molestias recusandae autem cumque veniam exercitationem tempore qui a. Quam eveniet assumenda alias culpa. ' />
-                <Typograph variant='body1' paragraph align='justify' text='Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident illum, nulla voluptate magnam consectetur odit maiores veniam, sunt et libero tempora nam enim atque in id ipsam eaque? Id enim laboriosam corporis consequatur incidunt dolore doloribus harum illo facilis molestias? Dolores asperiores eum voluptatum consequuntur quo dicta tenetur, incidunt totam ipsa molestias distinctio dolor explicabo ducimus quaerat! Quas sed pariatur ullam totam reiciendis voluptate obcaecati accusamus earum nam corrupti nemo, inventore iste fugiat nulla et nobis incidunt delectus perspiciatis temporibus id, blanditiis eos. Modi accusamus, in rerum est iusto laborum porro tempora, nemo distinctio quae minima aliquam fugiat molestias deleniti enim magni? Modi deleniti molestias recusandae autem cumque veniam exercitationem tempore qui a. Quam eveniet assumenda alias culpa. ' />
-                <Typograph variant='body1' paragraph align='justify' text='Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident illum, nulla voluptate magnam consectetur odit maiores veniam, sunt et libero tempora nam enim atque in id ipsam eaque? Id enim laboriosam corporis consequatur incidunt dolore doloribus harum illo facilis molestias? Dolores asperiores eum voluptatum consequuntur quo dicta tenetur, incidunt totam ipsa molestias distinctio dolor explicabo ducimus quaerat! Quas sed pariatur ullam totam reiciendis voluptate obcaecati accusamus earum nam corrupti nemo, inventore iste fugiat nulla et nobis incidunt delectus perspiciatis temporibus id, blanditiis eos. Modi accusamus, in rerum est iusto laborum porro tempora, nemo distinctio quae minima aliquam fugiat molestias deleniti enim magni? Modi deleniti molestias recusandae autem cumque veniam exercitationem tempore qui a. Quam eveniet assumenda alias culpa. ' />
+            <Container maxWidth='lg' sx={{ px: 4 }}>
+                <Typograph text='SIBOLANG' variant='h4' component='h3' textTransform='uppercase' fontWeight='bold' sx={{ mt: 4, mb: 1 }} />
+                <Typograph text='(Sistem Informasi Pengaduan Banjir Longsor, Abrasi dan Genangan)' variant='h6' sx={{ mb: 4 }} />
+                <Box
+                    sx={{
+                        backgroundImage: `url(${Sibolang})`,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundColor: 'primary.light',
+                        width: 400,
+                        height: 300,
+                        mx: 'auto',
+                        mb: 3
+                    }}
+                />
+                <Typograph variant='body1' paragraph align='justify' text='SIBOLANG merupakan sistem informasi pengaduan masyarakat terhadap kejadian/bencana akibat daya rusak air sesuai dengan namanya. Dengan adanya informasi tersebut membantu pemerintah dalam merespon dan mengambil langkah strategis sesuai ketentuan yang berlaku. Diharapkan sistem informasi ini dapat meningkatkan kepercayaan dan kinerja pelayanan pemerintah kepada masyarakat.' textTransform='none' />
             </Container>
             <Container maxWidth='100' sx={{ mt: 4, pt: 4, pb: 2, backgroundColor: 'primary.light' }}>
                 <Footer />

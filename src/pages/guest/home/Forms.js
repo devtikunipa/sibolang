@@ -11,7 +11,6 @@ import Typograph from '../../../components/Typograph';
 import APIGETALL from '../../../services/axios/GetAll';
 import Alert from '@mui/material/Alert';
 import APISTORE from '../../../services/axios/Store';
-import Input from '@mui/material/Input';
 import { useDropzone } from 'react-dropzone';
 import ReactPlayer from 'react-player';
 import Container from '@mui/material/Container';
@@ -19,17 +18,19 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
 import APIUPLOAD from '../../../services/axios/Upload';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import Checkbox from '@mui/material/Checkbox';
+import LoadingBackDrop from '../../../components/LoadingBackDrop';
+import AlertSnackbar from '../../../components/AlertSnackbar';
+import { useNavigate } from 'react-router-dom';
 
 
 const FormSikoja = () => {
+    const navigate = useNavigate();
     const initialDataState = {
         title: '',
         description: '',
@@ -43,11 +44,13 @@ const FormSikoja = () => {
     const [data, setData] = useState(initialDataState);
     const [categories, setCategories] = useState([]);
     const [villages, setVillages] = useState([]);
-    const [message, setMessage] = useState({ msg: 'Belum ada aktivitas', status: false, code: 201 });
-    const [open, setOpen] = useState(false);
+    const [openBackdrop, setOpenBackdrop] = useState(false);
+    const [message, setMessage] = useState('Belum ada aktivitas!');
+    const [codeStatus, setCodeStatus] = useState(true);
+    const [openSnackbar, setOpenSnackbar] = useState(false);
     const [checked, setChecked] = useState(false);
     const [files, setFiles] = useState([]);
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    const { getRootProps, isDragActive } = useDropzone({
         onDrop: acceptedFiles => {
             setFiles(acceptedFiles.map(file => Object.assign(file, {
                 preview: URL.createObjectURL(file)
@@ -60,7 +63,9 @@ const FormSikoja = () => {
         },
         maxFiles: 4,
         maxSize: 10240000,
-
+        minSize: 1,
+        noClick: true,
+        useFsAccessApi: false,
     });
 
     const thumbs = files.map(file => {
@@ -89,14 +94,18 @@ const FormSikoja = () => {
     }, []);
     useEffect(() => {
         APIGETALL.Villages().then(result => {
-            setVillages(result.data)
+            const dataVillages = result.data.sort((a, b) => (a.village > b.village) ? 1 : ((b.village > a.village) ? -1 : 0));
+            setVillages(dataVillages)
         });
     }, []);
 
     const handleOnChange = (event) => {
         const { name, value } = event.target;
-        setData({ ...data, [name]: value });
-        console.log({ ...data, [name]: value });
+        if (name === 'hp' && value.toString().length > 12) {
+            setData({ ...data });
+        } else {
+            setData({ ...data, [name]: value });
+        }
         setMessage({ status: false });
     };
     const handleOnSelectedVillage = (event, newValue) => {
@@ -106,53 +115,56 @@ const FormSikoja = () => {
 
     const handleChecked = (event) => {
         setChecked(event.target.checked);
+        if (event.target.checked === true) {
+            setData({ ...data, village_id: null })
+        }
     };
+
+    const save = async () => {
+        try {
+            const result = await APISTORE.StoreSibolang(data);
+            await Promise.all(files.map(async (file) => {
+                const data2 = new FormData();
+                data2.append('galery', file)
+                data2.append('sibolang_id', result.data.id);
+                await APIUPLOAD.UploadGalery(data2)
+            }))
+            setMessage("Laporan telah disampaikan");
+            setCodeStatus(true);
+            setOpenSnackbar(true);
+            navigate(`/detail/${result.data.id}`);
+        } catch (e) {
+            setMessage('Gagal menyimpan laporan, coba lagi!')
+            setCodeStatus(false)
+            setOpenSnackbar(true)
+            setOpenBackdrop(false)
+        }
+    }
 
     const handleOnSubmit = (event) => {
         event.preventDefault();
         if (files.length === 0) {
-            setMessage({ code: 400, msg: 'Upload gambar/video sebagai bukti pengaduan', status: true })
+            setMessage("Silahkan upload gambar atau video sebagai bukti pengaduan!");
+            setCodeStatus(true);
+            setOpenSnackbar(true);
         } else {
-            setOpen(true)
-            APISTORE.StoreSibolang(data).then(result => {
-                // console.log(result.data);
-                setMessage({ code: 201, msg: "Laporan telah disampaikan", status: true });
-                for (let file of files) {
-                    const data2 = new FormData();
-                    data2.append('galery', file)
-                    data2.append('sibolang_id', result.data.id)
-                    APIUPLOAD.UploadGalery(data2).then(() => {
-                        setData({
-                            title: '',
-                            description: '',
-                            village_id: null,
-                            category_id: null,
-                            name: '',
-                            hp: null,
-                        });
-                        setFiles([]);
-                    }).catch(() => {
-                        setOpen(false)
-                        setMessage({ code: 400, msg: 'Gagal mengupload, coba lagi!', status: true })
-                    })
-                }
-                setOpen(false)
-            }).catch((error) => {
-                console.log(error)
-                setMessage({ code: 400, msg: 'Gagal mengupload, coba lagi!', status: true })
-                setOpen(false)
-            });
+            setOpenBackdrop(true);
+            save();
         }
     }
 
+    const handleChangeFile = (e) => {
+        const acceptedFiles = Object.values(e.target.files);
+        setFiles(acceptedFiles.map(file => Object.assign(file, {
+            preview: URL.createObjectURL(file)
+        })));
+    }
+
+
     return (
         <Container maxWidth="lg" sx={{ mx: "auto", mt: 6 }}>
-            <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={open}
-            >
-                <CircularProgress color="inherit" />
-            </Backdrop>
+            <LoadingBackDrop open={openBackdrop} onClick={() => setOpenBackdrop(true)} />
+            <AlertSnackbar message={message} status={codeStatus} opensnackbar={openSnackbar} setOpensnackbar={setOpenSnackbar} />
             <Grid container>
                 <Grid item align='center' lg={8} xs={12} sm={12} md={10} sx={{ mx: 'auto' }}>
                     <Card
@@ -201,9 +213,20 @@ const FormSikoja = () => {
                                             <TextField fullWidth required id="hp" name='hp' type='number' label="Nomor Hp Anda (08...)" variant="outlined" value={!data.hp ? '' : data.hp} onChange={handleOnChange} />
                                         </Grid>
                                     </Grid>
-                                    <Paper sx={{ cursor: 'pointer', background: '#fafafa', color: '#bdbdbd', border: '1px dashed #ccc', '&:hover': { border: '1px solid #ccc' }, mt: 2 }}>
+                                    <Paper sx={{ cursor: 'pointer', background: '#fafafa', color: '#bdbdbd', border: '1px dashed #ccc', '&:hover': { border: '1px solid #ccc' }, mt: 2, pt: 2 }}>
+                                        <Button
+                                            variant="text"
+                                            component="label"
+                                        >
+                                            Upload
+                                            <input
+                                                type="file"
+                                                hidden
+                                                multiple
+                                                onChange={handleChangeFile}
+                                            />
+                                        </Button>
                                         <div style={{ padding: '20px', height: 'auto' }} {...getRootProps()}>
-                                            <Input {...getInputProps()} />
                                             {isDragActive ? (
                                                 <Typograph variant='subtitle1' text='Drop disini..' color='primary.main' />
                                             ) : (
@@ -226,7 +249,7 @@ const FormSikoja = () => {
                                 </FormControl>
                             </CardContent>
                             <CardActions sx={{ px: 2, pb: 4, pt: 1 }}>
-                                <Button fullWidth type='submit' variant='contained' onClick={() => { }}>Lapor</Button>
+                                <Button fullWidth size='large' type='submit' variant='contained' sx={{ fontSize: 18 }}>Lapor</Button>
                             </CardActions>
                         </form>
                     </Card>
