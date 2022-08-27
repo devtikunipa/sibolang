@@ -30,7 +30,7 @@ const Carousel = (props) => {
         const extension = post.galery_sibolang[0].filename.split(".");
         return (
           <Grid container key={index} alignItems='center' sx={{ display: { xs: 'none', sm: 'none', md: 'flex', lg: 'flex' }, bgcolor: 'primary.light', mt: 2, borderRadius: 2 }}>
-            <Grid item lg={6}>
+            <Grid item lg={6} md={6}>
               {
                 extension[1] === 'mp4' ? (
                   <Box>
@@ -52,7 +52,7 @@ const Carousel = (props) => {
                 )
               }
             </Grid>
-            <Grid item lg={6}>
+            <Grid item lg={6} md={6}>
               <Box
                 sx={{
                   p: { xs: 3, md: 6 },
