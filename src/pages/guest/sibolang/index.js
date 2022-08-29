@@ -58,7 +58,7 @@ const Sikojas = () => {
                         </Paper>
                     </form>
                     {
-                        search === null ? (
+                        search.length === 0 ? (
                             <Box sx={{ mx: 'auto', mt: 5, textAlign: 'center' }}>
                                 <Typography variant='body1' color='text.secondary'>Belum ada laporan...</Typography>
                             </Box>
