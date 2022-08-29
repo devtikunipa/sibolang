@@ -1,8 +1,8 @@
-import Http from './Http';
+import HTTPMAIN from './Http';
 
 const GetOne = (path) => {
     return new Promise((resolve, reject) => {
-        Http.get(path).
+        HTTPMAIN().get(path).
             then(result => {
                 resolve(result.data);
             }).catch(error => {

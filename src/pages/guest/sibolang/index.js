@@ -7,7 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Carousel from './Carousel';
 import ListSibolang from './ListSibolang';
 import Footer from '../Footer';
-import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import APIGETALL from '../../../services/axios/GetAll';
 import LoadingSkeleton from './LoadingSkeleton';
@@ -24,9 +24,8 @@ const Sikojas = () => {
         const filterData = data.filter(dat => dat.title.toLowerCase().includes(e.target.value.toLowerCase()) || dat.description.toLowerCase().includes(e.target.value.toLowerCase()) || dat.name.toLowerCase().includes(e.target.value.toLowerCase()));
 
         setSearch(filterData);
-
     }
-    const handleSubmit = (e) => e.preventDefault()
+    const handleSubmit = (e) => e.preventDefault();
 
     useEffect(() => {
         APIGETALL.Sibolangs().then(result => {
@@ -35,7 +34,6 @@ const Sikojas = () => {
             setIsLoading(false);
         });
     }, []);
-
 
     return (
         isLoading ? (
@@ -59,11 +57,18 @@ const Sikojas = () => {
                             </IconButton>
                         </Paper>
                     </form>
-                    <Carousel lastUpdate={search} />
-                    <ListSibolang data={search} />
-                    <Box sx={{ mx: 'auto', mt: 5, textAlign: 'center' }}>
-                        <Button variant='outlined'>Load more...</Button>
-                    </Box>
+                    {
+                        search === null ? (
+                            <Box sx={{ mx: 'auto', mt: 5, textAlign: 'center' }}>
+                                <Typography variant='body1' color='text.secondary'>Belum ada laporan...</Typography>
+                            </Box>
+                        ) : (
+                            <>
+                                <Carousel lastUpdate={search} />
+                                <ListSibolang data={search} />
+                            </>
+                        )
+                    }
                 </Container>
                 <Container maxWidth='100' sx={{ mt: 4, pt: 4, pb: 2, backgroundColor: 'primary.light' }}>
                     <Footer />

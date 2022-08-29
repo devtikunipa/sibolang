@@ -1,10 +1,10 @@
-import Http from './Http';
+import HTTPMAIN from './Http';
 import { URLROOT } from "..";
 
 const Store = (path, data) => {
     return new Promise((resolve, reject) => {
-        Http.get(`${URLROOT}sanctum/csrf-cookie`).then(() => {
-            Http.post(path, data).
+        HTTPMAIN().get(`${URLROOT}sanctum/csrf-cookie`).then(() => {
+            HTTPMAIN().post(path, data).
                 then(result => {
                     resolve(result.data);
                 }).catch(error => {

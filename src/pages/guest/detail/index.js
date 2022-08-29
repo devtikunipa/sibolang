@@ -17,18 +17,15 @@ const Detail = () => {
     useEffect(() => {
         APIGETONE.SibolangOne(params.id).then(result => {
             setSibolang(result.data);
-            setIsLoading(false);
-        }).catch(error => {
-            // console.log(error);
-            setIsLoading(true);
+        }).then(() => {
+            APIGETONE.DispOne(params.id).then(result => {
+                setDisposisi(result.data);
+            })
+        }).catch(() => {
+            setDisposisi(null);
+        }).finally(() => {
+            setIsLoading(false)
         });
-    }, []);
-
-    useEffect(() => {
-        APIGETONE.DispOne(params.id).then(result => {
-            setDisposisi(result.data);
-            setIsLoading(false);
-        }).catch(() => { });
     }, []);
 
     return (

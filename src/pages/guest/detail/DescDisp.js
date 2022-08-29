@@ -32,7 +32,7 @@ const MainMedia = (props) => {
                                         const extension = galery.filename.split('.')
                                         if (extension[1] === 'mp4') {
                                             return (
-                                                <ReactPlayer height='auto' width='100%' controls url={URLROOT + galery.path} playing={true} />
+                                                <ReactPlayer key={galery.id} height='auto' width='100%' controls url={URLROOT + galery.path} playing={true} />
 
                                             )
                                         } else {
