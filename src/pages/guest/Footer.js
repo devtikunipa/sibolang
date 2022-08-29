@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 
 
 const Footer = props => {
-    const text = 'Copyright © ' + new Date().getFullYear() + ' by SIKOJA';
+    const text = 'Copyright © ' + new Date().getFullYear() + ' by SIBOLANG';
     return (
         <Container maxWidth='100' {...props} sx={{ backgroundColor: 'primary.light', }}>
             <Typograph text={text} variant="body2" align='center' textTransform='capitalize' sx={{ pb: 1 }} />
