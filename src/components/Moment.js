@@ -1,9 +1,9 @@
-import moment from 'moment';
 import 'moment/locale/id';
+import moment from 'moment';
 
 
 const Moment = (dateTime) => {
-    return moment(dateTime).startOf('day').fromNow();
+    const date = moment().subtract(18, 'hours').format();
+    return moment(dateTime).startOf('day').from(date);
 }
-
 export default Moment
