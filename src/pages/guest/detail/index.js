@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Container from '@mui/system/Container';
 import DescDisp from './DescDisp';
 import Footer from '../Footer';
@@ -10,6 +10,7 @@ import DescSibolang from './DescSibolang';
 
 const Detail = () => {
     const params = useParams();
+    const navigate = useNavigate();
     const [sibolang, setSibolang] = useState([]);
     const [disposisi, setDisposisi] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +23,7 @@ const Detail = () => {
                 setDisposisi(result.data);
             })
         }).catch(() => {
-            setDisposisi(null);
+            !sibolang?.length ? navigate('/notfound', { replace: true }) : setDisposisi(null);
         }).finally(() => {
             setIsLoading(false)
         });
