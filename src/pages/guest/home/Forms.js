@@ -172,7 +172,7 @@ const FormSikoja = () => {
                     >
                         <form onSubmit={handleOnSubmit}>
                             <CardContent>
-                                <Typograph text="SIBOLANG" gutterBottom variant="h5" textTransform='uppercase' fontWeight='bold' sx={{ py: 2 }} />
+                                <Typograph text="SIBOLANG MANOKWARI" gutterBottom variant="h5" textTransform='uppercase' fontWeight='bold' sx={{ py: 2 }} />
                                 <Alert severity={message.code === 201 ? 'success' : 'error'} sx={{ mb: 2, display: `${message.status ? 'flex' : 'none'}` }} >{message.msg}</Alert>
                                 <FormControl fullWidth >
                                     <FormLabel id="radion-button" sx={{ mb: 1 }}>Pilih kategori Pengaduan!</FormLabel>

@@ -29,7 +29,7 @@ const Carousel = (props) => {
     <Grid container alignItems='center' sx={{ display: { xs: 'none', sm: 'none', md: 'flex', lg: 'flex' }, bgcolor: 'primary.light', mt: 2, borderRadius: 2 }}>
       <Grid item lg={6} md={6}>
         {
-          extension[1] === 'mp4' ? (
+          extension[extension.length - 1] === 'mp4' || extension[extension.length - 1] === 'mov' ? (
             <Box>
               <ReactPlayer height='auto' width='100%' controls url={URLROOT + data.galery_sibolang[0].path} playing={true} />
             </Box>

@@ -29,7 +29,7 @@ const FlowReport = () => {
                                 Laporan Diterima
                             </Typography>
                             <Typography variant='subtitle2' color='text.secondary'>
-                                Anda dapat melaporan kerusakan jalan melalui form diatas
+                                Anda dapat melapor bencana akibat daya rusak air(banjir,longsor, abrasi pantai, dan genangan air)
                             </Typography>
                         </StepLabel>
                     </Step>

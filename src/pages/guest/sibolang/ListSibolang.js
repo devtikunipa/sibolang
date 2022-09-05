@@ -45,7 +45,7 @@ const GridItem = ({ dt }) => {
                         dt.galery_sibolang.map((paths, index) => {
                             if (index === 0) {
                                 const name = paths.filename.split(".");
-                                if (name[1] === 'mp4') {
+                                if (name[name.length - 1] === 'mp4' || name[name.length - 1] === 'mov') {
                                     return (
                                         <ReactPlayer key={index} height='250px' width='100%' controls url={URLROOT + paths.path} playing={true} />
                                     )

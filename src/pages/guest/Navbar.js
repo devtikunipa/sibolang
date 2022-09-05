@@ -43,7 +43,7 @@ const NavBar = () => {
         <AppBar position="static">
             <Container maxWidth="lg">
                 <Toolbar disableGutters>
-                    <Typograph text="SIBOLANG"
+                    <Typograph text="SIBOLANG MANOKWARI"
                         variant="h5"
                         noWrap
                         component="a"
@@ -53,7 +53,6 @@ const NavBar = () => {
                             display: { xs: 'none', md: 'flex' },
                             fontFamily: 'monospace',
                             fontWeight: 700,
-                            letterSpacing: '.05rem',
                             color: 'white',
                             textDecoration: 'none',
                         }}
@@ -95,8 +94,8 @@ const NavBar = () => {
                             ))}
                         </Menu>
                     </Box>
-                    <Typograph text="SIBOLANG"
-                        variant="h5"
+                    <Typograph text="SIBOLANG MANOKWARI"
+                        variant="h6"
                         noWrap
                         component="a"
                         href="/"
@@ -106,7 +105,6 @@ const NavBar = () => {
                             flexGrow: 1,
                             fontFamily: 'monospace',
                             fontWeight: 700,
-                            letterSpacing: '.1rem',
                             color: 'white',
                             textDecoration: 'none',
                         }}
